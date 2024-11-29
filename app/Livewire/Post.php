@@ -27,6 +27,12 @@ class Post extends Component
         $this->title = '';
         $this->description = '';
     }
+    public function edit($id)
+    {
+        $post = \App\Models\Post::findOrFail($id);
+        $this->title = $post->title;
+        $this->description = $post->description;
+    }
     public function update($id)
     {
         $post = \App\Models\Post::findOrFail($id);

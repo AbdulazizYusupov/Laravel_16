@@ -46,9 +46,9 @@
                                     <div class="modal-body">
                                         <input type="hidden" wire:model="id" value="{{ $model->id }}">
                                         <input class="form-control" type="text" wire:model="title"
-                                               value="{{ $model->title }}"><br>
+                                               value="{{ $title }}"><br>
                                         <input class="form-control" type="text" wire:model="description"
-                                               value="{{ $model->description }}"><br>
+                                               value="{{ $description }}"><br>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

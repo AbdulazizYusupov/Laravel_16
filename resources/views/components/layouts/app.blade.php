@@ -14,11 +14,8 @@
             <div class="col-md-12">
                 <ul>
                     <li><a href="/" wire:navigate>Bosh sahifa</a></li>
-                    <li><a href="/home" wire:navigate>Home</a></li>
-                    <li><a href="/calc" wire:navigate>Calc</a></li>
-                    <li><a href="/test" wire:navigate>test</a></li>
-                    <li><a href="/page" wire:navigate>page</a></li>
                     <li><a href="/post" wire:navigate>Posts</a></li>
+                    <li><a href="/category" wire:navigate>Category</a></li>
                 </ul>
             </div>
         </div>
