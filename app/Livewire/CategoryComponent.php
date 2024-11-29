@@ -13,6 +13,7 @@ class CategoryComponent extends Component
     public $editName;
     public $editId;
     public $searchName = '';
+    public $paginationTheme = 'bootstrap';
     public function mount()
     {
         $this->all();
@@ -70,19 +71,19 @@ class CategoryComponent extends Component
         }
         $this->all();
     }
-    public function edit(Category $model)
+    public function edit($id)
     {
-        $this->editId = $model->id;
-        $this->editName = $model->name;
+        if ($this->editId === $id) {
+            $this->reset('editId', 'editName');
+        } else {
+            $this->editId = $id;
+            $this->editName = $this->models->find($id)->name;
+        }
     }
-    public function update()
+
+    public function update($id)
     {
-        $models = Category::findOrFail($this->editId);
-        $models->update([
-            'name' => $this->editName,
-        ]);
-        $this->all();
-        $this->editId = '';
-        $this->editName = '';
+        $this->models->find($id)->update(['name' => $this->editName]);
+        $this->reset('editId', 'editName');
     }
 }
