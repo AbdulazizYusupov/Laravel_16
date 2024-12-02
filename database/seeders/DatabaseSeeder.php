@@ -22,17 +22,17 @@ class DatabaseSeeder extends Seeder
 //            'name' => 'Test User',
 //            'email' => 'test@example.com',
 //        ]);
-//        for ($i = 0; $i < 100; $i++) {
-//            Category::create([
-//                'name' => 'Category ' . $i,
-//            ]);
-//        }
-//        for ($i = 0; $i < 100; $i++) {
-//            Post::create([
-//                'title' => 'Post ' . $i,
-//                'description' => 'Content ' . $i,
-//                'category_id' => rand(4, 105),
-//            ]);
-//        }
+        for ($i = 0; $i < 100; $i++) {
+            Category::create([
+                'name' => 'Category ' . $i,
+            ]);
+        }
+        for ($i = 0; $i < 100; $i++) {
+            Post::create([
+                'title' => 'Post ' . $i,
+                'description' => 'Content ' . $i,
+                'category_id' => rand(1, 100),
+            ]);
+        }
     }
 }

@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/post">Post</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/blog">Blog</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -7,3 +7,4 @@ Route::get('/', function () {
 });
 Route::get('/post',\App\Livewire\Post::class);
 Route::get('/category',\App\Livewire\CategoryComponent::class);
+Route::get('/blog',\App\Livewire\Blog::class);

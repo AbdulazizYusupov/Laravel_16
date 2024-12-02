@@ -12,5 +12,16 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
+    public function views()
+    {
+        return $this->hasMany(View::class, 'post_id');
+    }
+    public function like_or_dislike()
+    {
+        return $this->hasMany(LikeOrDislike::class, 'post_id');
+    }
 }
