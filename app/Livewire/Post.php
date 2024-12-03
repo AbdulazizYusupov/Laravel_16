@@ -19,6 +19,17 @@ class Post extends Component
     public $searchTitle = '';
     public $searchDesc = '';
     public $searchCat = '';
+    protected $rules = [
+        'title' => 'required|max:255',
+        'description' => 'required|max:255',
+        'category_id' => 'required'
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function mount()
     {
         $this->all();
@@ -48,17 +59,10 @@ class Post extends Component
 
     public function save()
     {
-        if (!empty($this->title) && !empty($this->description && !empty($this->category_id))) {
-            \App\Models\Post::create([
-                'title' => $this->title,
-                'description' => $this->description,
-                'category_id' => $this->category_id,
-            ]);
-            $this->activeForm = false;
-            $this->title = '';
-            $this->description = '';
-            $this->category_id = '';
-        }
+        $data = $this->validate();
+        \App\Models\Post::create($data);
+        $this->activeForm = false;
+        $this->reset(['title', 'description', 'category_id']);
         $this->all();
     }
 
@@ -69,6 +73,7 @@ class Post extends Component
             ->where('category_id', 'LIKE', "{$this->searchCat}%")
             ->get();
     }
+
     public function changeModel(\App\Models\Post $model)
     {
         $model->update([
@@ -76,6 +81,7 @@ class Post extends Component
         ]);
         $this->all();
     }
+
     public function delete($id)
     {
         $post = \App\Models\Post::findOrFail($id);
@@ -84,6 +90,7 @@ class Post extends Component
         }
         $this->all();
     }
+
     public function edit($id)
     {
         if ($this->editId === $id) {

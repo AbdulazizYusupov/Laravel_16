@@ -6,18 +6,21 @@
         <form wire:submit.prevent="save">
             <div class="row">
                 <div class="col-3">
-                    <input type="text" wire:model="title" class="form-control" placeholder="Title">
+                    <input type="text" wire:model.blur="title" class="form-control" placeholder="Title">
                 </div>
+                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                 <div class="col-3">
-                    <input type="text" wire:model="description" class="form-control" placeholder="Description">
+                    <input type="text" wire:model.blur="description" class="form-control" placeholder="Description">
                 </div>
+                @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                 <div class="col-3">
-                    <select class="form-select" wire:model="category_id">
+                    <select class="form-select" wire:model.blur="category_id">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
+                @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
                 <div class="col-3">
                     <input type="submit" class="btn btn-primary" value="Save">
                 </div>

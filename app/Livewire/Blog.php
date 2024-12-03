@@ -105,5 +105,6 @@ class Blog extends Component
                 'value' => $value,
             ]);
         }
+        $this->show($id);
     }
 }
