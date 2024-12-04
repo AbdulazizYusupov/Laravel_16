@@ -84,17 +84,17 @@
                                         <li class="d-flex align-items-center">
                                             <i class="bi bi-hand-thumbs-up"></i>
                                             @if($react && $react->value === 1)
-                                                <span class="like active">Liked</span>
+                                                <span class="like active">Liked {{$blog->like_or_dislike->where('value',1)->count()}}</span>
                                             @else
-                                                <a class="show"  wire:click="reaction({{ $blog->id }}, 1)" class="like">Like</a>
+                                                <a class="show"  wire:click="reaction({{ $blog->id }}, 1)" class="like">Like {{$blog->like_or_dislike->where('value',1)->count()}}</a>
                                             @endif
                                         </li>
                                         <li class="d-flex align-items-center">
                                             <i class="bi bi-hand-thumbs-down"></i>
                                             @if($react && $react->value === 0)
-                                                <span class="dislike active">Disliked</span>
+                                                <span class="dislike active">Disliked  {{$blog->like_or_dislike->where('value',0)->count()}}</span>
                                             @else
-                                                <a class="show"  wire:click="reaction({{ $blog->id }}, 0)" class="dislike">Dislike</a>
+                                                <a class="show"  wire:click="reaction({{ $blog->id }}, 0)" class="dislike">Dislike {{$blog->like_or_dislike->where('value',0)->count()}}</a>
                                             @endif
                                         </li>
                                     </ul>
@@ -116,14 +116,12 @@
                             @foreach($comments as $comment)
                                 <div id="comment-1" class="comment">
                                     <div class="d-flex">
-                                        <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
                                         <div>
                                             <h5><a class="show"  wire:click="answer({{ $comment->id }}, {{ $blog->id }})"
                                                    class="reply">
                                                     <i class="bi bi-reply-fill"></i> Reply
                                                 </a>
                                             </h5>
-                                            <time datetime="2020-01-01">01 Jan,2022</time>
                                             <p>{{$comment->text}}</p>
                                         </div>
                                     </div>

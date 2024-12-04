@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Group;
+use App\Models\Jadval;
 use App\Models\Post;
+use App\Models\Test;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,5 +37,30 @@ class DatabaseSeeder extends Seeder
                 'category_id' => rand(1, 100),
             ]);
         }
+        for ($i = 1; $i <= 20; $i++) {
+            Group::create([
+                'name' => 'Group ' . $i,
+                'tr' => rand(1, 20),
+            ]);
+        }
+        for ($i = 1; $i <= 20; $i++) {
+            Test::create([
+                'name' => 'Test ' . $i,
+                'status' => rand(0, 3)
+            ]);
+        }
+        for ($i = 1; $i <= 20; $i++) {
+            User::create([
+                'name' => 'User ' . $i,
+                'email' => 'user' . $i . '@example.com',
+                'password' => bcrypt('<PASSWORD>'),
+            ]);
+        }
+//        for ($i = 1; $i <= 20; $i++) {
+//            Jadval::create([
+//                'user_id' => rand(1, 20),
+//                'data'
+//            ]);
+//        }
     }
 }

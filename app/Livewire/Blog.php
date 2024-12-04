@@ -24,7 +24,7 @@ class Blog extends Component
 
     public function render()
     {
-        $categories = \App\Models\Category::all();
+        $categories = \App\Models\Category::all()->take(10);
         $blogs = \App\Models\Post::orderBy('id','desc')->paginate(9);
         return view('livewire.blog', compact('blogs','categories'))->layout('components.layouts.blog');
     }
