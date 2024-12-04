@@ -45,8 +45,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function davomats()
-    {
-        return $this->hasMany(Jadval::class,'user_id','id');
-    }
 }

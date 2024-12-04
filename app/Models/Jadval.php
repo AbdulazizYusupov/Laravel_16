@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jadval extends Model
 {
-    protected $fillable = ['user_id','value','data'];
+    protected $fillable = ['student_id','value','data'];
 
-    public function user()
+    public function student()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Student::class,'student_id');
     }
 }

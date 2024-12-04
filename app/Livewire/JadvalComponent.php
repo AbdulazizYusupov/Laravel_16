@@ -3,48 +3,87 @@
 namespace App\Livewire;
 
 use App\Models\Jadval;
-use App\Models\User;
+use App\Models\Student;
 use Carbon\Carbon;
 use Livewire\Component;
 
 class JadvalComponent extends Component
 {
-    public $today;
-    public $users;
-    public $models = [];
-    public $inputValues = [];
+    public $activeForm = false;
+    public $date;
+    public $name;
+    public $studentId;
+    public $davomatDate;
+    public $students;
 
     public function mount()
     {
-        $this->today = Carbon::now()->format('Y-m');
-        $this->users = User::all();
-        $this->models = Jadval::all();
-        $this->initInputValues();
+        $this->all();
     }
 
-    public function initInputValues()
+    public function all()
     {
-        foreach ($this->models as $jadval) {
-            $this->inputValues[$jadval->user_id][$jadval->data] = $jadval->value;
-        }
-    }
-
-    public function updateValue($userId, $date, $value)
-    {
-        $jadval = Jadval::firstOrNew([
-            'user_id' => $userId,
-            'data' => $date,
-        ]);
-
-        $jadval->value = $value;
-        $jadval->save();
-
-        $this->models = Jadval::all();
-        $this->initInputValues();
+        $this->date = Carbon::now();
+        $this->students = Student::all();
+        return $this->students;
     }
 
     public function render()
     {
-        return view('livewire.jadval-component');
+        $daysInMonth = $this->date->daysInMonth;
+        $days = [];
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $days[] = Carbon::create($this->date->year, $this->date->month, $i);
+        }
+        return view('livewire.jadval-component', ['days' => $days]);
+    }
+
+    public function changeDate($date)
+    {
+        $this->date = Carbon::parse($date);
+    }
+
+    public function inputView($id, $date)
+    {
+        $this->studentId = $id;
+        $this->davomatDate = $date;
+    }
+
+    public function createDavomat(Student $student, $date, $value)
+    {
+        $student->jadvals()->updateOrCreate(
+            ['data' => Carbon::parse($date)],
+            ['value' => $value],
+        );
+        $this->studentId = '';
+        $this->davomatDate = '';
+    }
+
+    public function delete($id)
+    {
+        $student = Student::findOrFail($id)->delete();
+        $this->all();
+    }
+
+    public function create()
+    {
+        $this->activeForm = true;
+    }
+
+    public function cancel()
+    {
+        $this->activeForm = false;
+    }
+
+    public function save()
+    {
+        if (!empty($this->name)) {
+            Student::create([
+                'name' => $this->name,
+            ]);
+            $this->activeForm = false;
+            $this->name = '';
+        }
+        $this->all();
     }
 }
